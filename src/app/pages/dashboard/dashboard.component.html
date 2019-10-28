@@ -367,3 +367,76 @@
     </div>
   </div>
 </div>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openXl(content)">Extra large modal</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">¡Último paso! Cuéntanos qué cosas te interesan</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+       
+
+      
+        <div class="card-body">
+            <div class="row icon-examples">
+              <div class="col-lg-3 col-md-6">
+                <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'active-40' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'active-40'" (cbOnSuccess) = "copy = 'active-40'">
+                  <div>
+                    <i class="ni ni-active-40"></i>
+                    <span>active-40</span>
+                  </div>
+                </button>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'air-baloon' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'air-baloon'" (cbOnSuccess) = "copy = 'air-baloon'">
+                    <div>
+                      <i class="ni ni-air-baloon"></i>
+                      <span>air-baloon</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'album-2' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'album-2'" (cbOnSuccess) = "copy = 'album-2'">
+                      <div>
+                        <i class="ni ni-album-2"></i>
+                        <span>album-2</span>
+                      </div>
+                    </button>
+                  </div>
+
+
+                  <div class="col-lg-3 col-md-6">
+                      <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'align-center' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'align-center'" (cbOnSuccess) = "copy = 'align-center'">
+                        <div>
+                          <i class="ni ni-align-center"></i>
+                          <span>align-center</span>
+                        </div>
+                      </button>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'align-left-2' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'align-left-2'" (cbOnSuccess) = "copy = 'align-left-2'">
+                          <div>
+                            <i class="ni ni-align-left-2"></i>
+                            <span>align-left-2</span>
+                          </div>
+                        </button>
+                      </div>
+
+
+              </div>
+              </div>
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
+  </ng-template>

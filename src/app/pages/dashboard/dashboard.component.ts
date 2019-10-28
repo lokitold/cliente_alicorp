@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 // core components
 import {
@@ -12,7 +13,8 @@ import {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class DashboardComponent implements OnInit {
 
@@ -22,7 +24,8 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
 
-  constructor() { }
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {config.backdrop = 'static';
+  config.keyboard = false; }
 
   ngOnInit() {
 
@@ -53,8 +56,8 @@ export class DashboardComponent implements OnInit {
 		});
   }
 
-
-
+  openXl(content) 
+  { this.modalService.open(content, {size: 'lg'}); }
 
 
   public updateOptions() {
