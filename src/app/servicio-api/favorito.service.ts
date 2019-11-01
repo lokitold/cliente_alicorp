@@ -11,15 +11,15 @@ export class FavoritoService {
   header = {
     headers: new HttpHeaders()
       .set('Content-Type', 'application/json')
-      .set('Authorization',  localStorage.getItem("token"))
+      // .set('Authorization',  localStorage.getItem("token"))
   }
 
   ip= "http://192.168.1.130:8000";
 
-  favorito = this.ip + "/";
+  favorito = this.ip + "/listar-categorias";
 
 
-  perfilDetalles(){
+  favoritoSubCategorias(){
     // return this.http.get(this.favorito+ localStorage.getItem("token"), this.header)
 
     return this.http.get(this.favorito , this.header)
