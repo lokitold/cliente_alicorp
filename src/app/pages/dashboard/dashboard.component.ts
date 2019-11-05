@@ -27,10 +27,8 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
 
-  items = ['First', 'Second', 'Third','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa','aaa'];
-
-
-
+  categorias: any;
+  subcategorias: any;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {config.backdrop = 'static';
   config.keyboard = false; }
@@ -78,13 +76,36 @@ export class DashboardComponent implements OnInit {
   listarSubCategorias(){
     this.favorito.favoritoSubCategorias().subscribe(
       data => {
+        var keys = Object.keys(data);
+        var len = keys.length;
         console.log(data);
         console.log(data["0"]);
-        console.log(data);
+        console.log(len);
+        this.categorias = data
+        for (let index = 0; index < keys.length; index++) {
+          // this.categorias = data[index]
+          console.log(data[index]["subcategoria"][""]);
+          // this.subcategorias = data[index]["subcategoria"];
+          this.subcategorias = data[index]["idcategoria"];
+        }
+
       }
       
     )
+
+    
   }
+
+
+  
+  items:any = [{'name' : 'Prashant'}]  
+  myDist = [];
+  
+  addDistrict(item){
+     this.myDist.push(item)
+     console.log(this.myDist)
+
+    }
 
 
 }
