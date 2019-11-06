@@ -393,18 +393,17 @@
       <!-- AQUI EMPIEZA -->
 
       <div class="row icon-examples" *ngFor="let item of categorias; index as i" >
-
         <div *ngFor="let subcategoria of item.subcategoria" class="col-lg-4 col-md-6">
-
           <button [attr.id]="subcategoria.id_subcategoria" (click)="addDistrict(subcategoria.id_subcategoria)"  type="button" class="btn-icon-clipboard" >
           <div>
             <span class="text-center">{{subcategoria.sub_nombre}}</span>
           </div>
         </button>
-
-        
-        </div>
+        </div>  
       </div>
+      <br>
+      <br>
+      <br>
       {{myDist | json}}
 
       <!-- <div class="row icon-examples" *ngFor="let item of categorias; index as i" [attr.id]="'element-'+i"> 

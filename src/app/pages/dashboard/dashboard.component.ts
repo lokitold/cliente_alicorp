@@ -30,8 +30,10 @@ export class DashboardComponent implements OnInit {
   categorias: any;
   subcategorias: any;
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {config.backdrop = 'static';
-  config.keyboard = false; }
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
     this.listarSubCategorias();
@@ -58,14 +60,15 @@ export class DashboardComponent implements OnInit {
     var chartSales = document.getElementById('chart-sales');
 
     this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
+      type: 'line',
+      options: chartExample1.options,
+      data: chartExample1.data
+    });
+
+
   }
 
-  openXl(content) 
-  { this.modalService.open(content, {size: 'lg'}); }
+  openXl(content) { this.modalService.open(content, { size: 'lg' }); }
 
 
   public updateOptions() {
@@ -73,7 +76,7 @@ export class DashboardComponent implements OnInit {
     this.salesChart.update();
   }
 
-  listarSubCategorias(){
+  listarSubCategorias() {
     this.favorito.favoritoSubCategorias().subscribe(
       data => {
         var keys = Object.keys(data);
@@ -90,22 +93,45 @@ export class DashboardComponent implements OnInit {
         }
 
       }
-      
-    )
 
-    
+    )
   }
 
 
-  
-  items:any = [{'name' : 'Prashant'}]  
+
+  items: any = [{ 'name': 'Prashant' }]
   myDist = [];
-  
-  addDistrict(item){
-     this.myDist.push(item)
-     console.log(this.myDist)
+
+  numerodeprueba = 0;
+  estado = false;
+  numero = 0;
+  addDistrict(item) {
+
+    if (this.myDist.length == 0) {
+      this.myDist.push(item)
+    }
+    else if (this.myDist.length != 0) {
+      for (let index = 0; index < this.myDist.length; index++) {
+        if (this.myDist[index] === item) {
+          this.estado = true;
+          this.numero = index;
+          break;
+        }
+      }
+      if (this.estado == true) {
+        this.myDist.splice(this.numero, 1);
+        this.estado = false;
+      }
+      else {
+        this.myDist.push(item)
+      }
 
     }
+
+  }
+
+
+
 
 
 }
