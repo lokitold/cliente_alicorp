@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 // core components
 import {
@@ -35,10 +37,11 @@ export class DashboardComponent implements OnInit {
     config.keyboard = false;
   }
 
+  mr: NgbModalRef;
+
   ngOnInit() {
     this.listarSubCategorias();
-
-
+    // this.registrar();
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
       [0, 20, 5, 25, 10, 30, 15, 40, 40]
@@ -65,8 +68,13 @@ export class DashboardComponent implements OnInit {
       data: chartExample1.data
     });
 
-
   }
+
+
+  // public registrar() {
+  //   this.mr = this.modalService.open(content);
+  //  }
+
 
   openXl(content) { this.modalService.open(content, { size: 'lg' }); }
 
@@ -96,11 +104,11 @@ export class DashboardComponent implements OnInit {
 
     )
   }
+  coco: any;
 
-
-
-  items: any = [{ 'name': 'Prashant' }]
-  myDist = [];
+  myDist = [{
+    id_subcategoria : this.coco,
+  }];
 
   numerodeprueba = 0;
   estado = false;
@@ -108,7 +116,9 @@ export class DashboardComponent implements OnInit {
   addDistrict(item) {
 
     if (this.myDist.length == 0) {
-      this.myDist.push(item)
+      // this.myDist.push(item)
+       this.coco = item
+       this.myDist.push(this.coco)
     }
     else if (this.myDist.length != 0) {
       for (let index = 0; index < this.myDist.length; index++) {
@@ -123,13 +133,54 @@ export class DashboardComponent implements OnInit {
         this.estado = false;
       }
       else {
-        this.myDist.push(item)
+        // this.myDist.push(item)
+        this.coco = item
+        this.myDist.push(this.coco)
       }
 
     }
 
   }
 
+
+  sendPreferencias(){
+
+    // const formArray = new FormData();
+
+    // for (let index = 0; index < this.myDist.length; index++) {
+    //   formArray.append('id_subcategoria', this.myDist[index]);
+    // }
+
+
+    var subcategoria = {
+      id_subcategoria: 34
+  };
+
+
+
+    const formData = new FormData();
+    formData.append('api_token', localStorage.getItem("token"));
+
+    for (var key in subcategoria) {
+      console.log(key, subcategoria[key]);
+      formData.append('subcategoria', subcategoria[key]);
+  }
+
+    // formData.append('subcategoria', new Blob( [ JSON.stringify( formArray ) ]));
+
+
+    console.log(formData);
+    
+
+
+    this.favorito.sendFavoritoSubCategorias(formData).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
+    // console.log("hola");
+
+  }
 
 
 

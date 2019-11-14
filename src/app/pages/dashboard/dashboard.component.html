@@ -392,35 +392,70 @@
 
       <!-- AQUI EMPIEZA -->
 
-      <div class="row icon-examples" *ngFor="let item of categorias; index as i" >
+      <!-- <div class="row icon-examples" *ngFor="let item of categorias; index as i">
         <div *ngFor="let subcategoria of item.subcategoria" class="col-lg-4 col-md-6">
-          <button [attr.id]="subcategoria.id_subcategoria" (click)="addDistrict(subcategoria.id_subcategoria)"  type="button" class="btn-icon-clipboard" >
-          <div>
-            <span class="text-center">{{subcategoria.sub_nombre}}</span>
-          </div>
-        </button>
-        </div>  
-      </div>
-      <br>
-      <br>
-      <br>
-      {{myDist | json}}
-
-      <!-- <div class="row icon-examples" *ngFor="let item of categorias; index as i" [attr.id]="'element-'+i"> 
-        <div *ngFor="let items of categorias; let e = index" class="col-lg-3 col-md-6">
-          <button type="button" placement="top-center" triggers="hover focus click"
-            ngbTooltip="{{copy === 'active-40' ? 'Copied':'Copy to clipboard'}}" class="btn-icon-clipboard" ngxClipboard
-            [cbContent]="'active-40'" (cbOnSuccess)="copy = 'active-40'">
+          <button [attr.id]="subcategoria.id_subcategoria" (click)="addDistrict(subcategoria.id_subcategoria)"
+            type="button" class="btn-icon-clipboard">
             <div>
-              <i class="ni ni-active-40"></i>
-              <span>{{i+1}} {{items.cat_descripcion}}</span>
+              <span class="text-center">{{subcategoria.sub_nombre}}</span>
             </div>
           </button>
         </div>
       </div> -->
 
 
-<!-- AQUI ACABA -->
+      <div class="row icon-examples" *ngFor="let item of categorias; index as i">
+          <div *ngFor="let subcategoria of item.subcategoria" class="col-lg-4 col-md-6">
+              <div class="btn-group btn-group-toggle btn-block">
+                  <label class="btn-icon-clipboard" id="pruebaid" ngbButtonLabel>
+                      <div>
+                    <input  (click)="addDistrict(subcategoria.id_subcategoria)" type="checkbox" ngbButton>
+                    <i class="ni ni-app" style="color:gray"></i> 
+                    <span class="text-center">{{subcategoria.sub_nombre}}</span>
+                    </div>
+                  </label>
+                </div>
+      <br>
+      <br>
+          </div>
+        </div>
+
+
+      
+      {{myDist | json}}
+
+      <button  (click)="sendPreferencias()"
+      type="button" class="btn btn-outline-dark" > Enviar </button>
+
+      <!-- <div class="btn-group btn-group-toggle">
+        <label id="pruebaid" ngbButtonLabel>
+          <input type="checkbox" ngbButton> aaaaa
+        </label>
+        <label id="colorButtonPref" class="btn-primary" ngbButtonLabel>
+          <input type="checkbox" ngbButton> Middle
+        </label>
+        <label id="colorButtonPref" class="btn-primary" ngbButtonLabel>
+          <input type="checkbox" ngbButton> Right
+        </label>
+      </div>
+
+
+
+      <div class="row icon-examples">
+        <div class="col-lg-4 col-md-6">
+          <div class="btn-group btn-group-toggle">
+            <label id="pruebaid" ngbButtonLabel>
+              <input type="checkbox" ngbButton>
+              <div>
+                <span class="text-center">LA WEA FOME</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div> -->
+
+
+      <!-- AQUI ACABA -->
 
     </div>
   </div>
