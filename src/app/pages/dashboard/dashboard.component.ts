@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
 
   categorias: any;
   subcategorias: any;
+  archivos: any;
 
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {
@@ -42,9 +43,11 @@ export class DashboardComponent implements OnInit {
   mr: NgbModalRef;
 
   ngOnInit() {
-    this.ModalFavorito(this.ModalPreferencias);
+    // this.ModalFavorito(this.ModalPreferencias);
+    //  this.listarSubCategorias();
 
-    this.listarSubCategorias();
+    this.listarArchivosFavoritos()
+
     // this.registrar();
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
@@ -92,6 +95,9 @@ export class DashboardComponent implements OnInit {
     this.salesChart.update();
   }
 
+  myDist = [];
+
+
   listarSubCategorias() {
     this.favorito.favoritoSubCategorias().subscribe(
       data => {
@@ -115,14 +121,11 @@ export class DashboardComponent implements OnInit {
   coco: any;
 
   // myDist = [];
-  myDist = [];
 
   numerodeprueba = 0;
   estado = false;
   numero = 0;
   addDistrict(item) {
-
-    
 
     if (this.myDist.length == 0) {
       // this.myDist.push(item)
@@ -152,42 +155,24 @@ export class DashboardComponent implements OnInit {
         })
       }
     }
-    
+  }
 
+
+  sendPreferencias(){
     const data = {'api_token': localStorage.getItem("token"), "subcategoria": this.myDist};
     console.log(data);
 
   }
 
 
-  sendPreferencias(){
-
-    // const formArray = new FormData();
-
-    // for (let index = 0; index < this.myDist.length; index++) {
-    //   formArray.append('id_subcategoria', this.myDist[index]);
-    // }
-
-    // const data = {'password_actual': event.target.value};
-
-
-    // formData.append('subcategoria', new Blob( [ JSON.stringify( formArray ) ]));
-
-
-    // console.log(data);
-    
-
-
-    // this.favorito.sendFavoritoSubCategorias(data).subscribe(
-    //   data => {
-    //     console.log(data);
-    //   }
-    // )
-     console.log("hola");
-
+  listarArchivosFavoritos(){
+    console.log("holaaa")
+    this.favorito.listarFavoritos().subscribe(
+      data => {
+        console.log(data)
+        this.archivos = data;
+      }
+    );
   }
-
-
-
 
 }

@@ -24,8 +24,8 @@ export class FavoritoService {
   enviarFavorito = this.ip + "/seleccionar-subcategoria";
   listaSubcategorias= this.ip + "/users";
 
-  listarFavorito = this.ip + "/Bandeja-de-archivos";
-
+  // listarFavorito = this.ip + "/Bandeja-de-archivos";
+  listarFavorito = this.ip + "/users";
   
 
   favoritoSubCategorias(){
