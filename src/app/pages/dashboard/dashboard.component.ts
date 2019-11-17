@@ -161,6 +161,11 @@ export class DashboardComponent implements OnInit {
   sendPreferencias(){
     const data = {'api_token': localStorage.getItem("token"), "subcategoria": this.myDist};
     console.log(data);
+    this.favorito.sendFavoritoSubCategorias(data).subscribe(
+      data => {
+        console.log(data)
+      }
+    );
 
   }
 
