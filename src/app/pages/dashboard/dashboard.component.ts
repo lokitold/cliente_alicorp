@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
 import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,6 +22,7 @@ import { FavoritoService } from 'src/app/servicio-api/favorito.service';
 
 
 export class DashboardComponent implements OnInit {
+  @ViewChild ('ModalPreferencias') public ModalPreferencias: ElementRef;
 
   public datasets: any;
   public data: any;
@@ -32,6 +33,7 @@ export class DashboardComponent implements OnInit {
   categorias: any;
   subcategorias: any;
 
+
   constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -40,6 +42,8 @@ export class DashboardComponent implements OnInit {
   mr: NgbModalRef;
 
   ngOnInit() {
+    this.ModalFavorito(this.ModalPreferencias);
+
     this.listarSubCategorias();
     // this.registrar();
     this.datasets = [
@@ -75,9 +79,13 @@ export class DashboardComponent implements OnInit {
   //   this.mr = this.modalService.open(content);
   //  }
 
-
-  openXl(content) { this.modalService.open(content, { size: 'lg' }); }
-
+  ModalFavorito(ModalPreferencias) {
+    try {
+    this.modalService.open(ModalPreferencias, { size: 'lg'}); 
+    } catch (error) {
+      
+    }
+  }
 
   public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
@@ -106,25 +114,29 @@ export class DashboardComponent implements OnInit {
   }
   coco: any;
 
-  myDist = [{
-    id_subcategoria : this.coco,
-  }];
+  // myDist = [];
+  myDist = [];
 
   numerodeprueba = 0;
   estado = false;
   numero = 0;
   addDistrict(item) {
 
+    
+
     if (this.myDist.length == 0) {
       // this.myDist.push(item)
        this.coco = item
-       this.myDist.push(this.coco)
+       this.myDist.push({
+        'id_subcategoria': this.coco
+      })
     }
     else if (this.myDist.length != 0) {
       for (let index = 0; index < this.myDist.length; index++) {
-        if (this.myDist[index] === item) {
+        if (this.myDist[index]["id_subcategoria"] === item) {
           this.estado = true;
           this.numero = index;
+        console.log("asdadsa" + index)
           break;
         }
       }
@@ -135,10 +147,15 @@ export class DashboardComponent implements OnInit {
       else {
         // this.myDist.push(item)
         this.coco = item
-        this.myDist.push(this.coco)
+        this.myDist.push({
+          'id_subcategoria': this.coco
+        })
       }
-
     }
+    
+
+    const data = {'api_token': localStorage.getItem("token"), "subcategoria": this.myDist};
+    console.log(data);
 
   }
 
@@ -151,34 +168,22 @@ export class DashboardComponent implements OnInit {
     //   formArray.append('id_subcategoria', this.myDist[index]);
     // }
 
+    // const data = {'password_actual': event.target.value};
 
-    var subcategoria = {
-      id_subcategoria: 34
-  };
-
-
-
-    const formData = new FormData();
-    formData.append('api_token', localStorage.getItem("token"));
-
-    for (var key in subcategoria) {
-      console.log(key, subcategoria[key]);
-      formData.append('subcategoria', subcategoria[key]);
-  }
 
     // formData.append('subcategoria', new Blob( [ JSON.stringify( formArray ) ]));
 
 
-    console.log(formData);
+    // console.log(data);
     
 
 
-    this.favorito.sendFavoritoSubCategorias(formData).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-    // console.log("hola");
+    // this.favorito.sendFavoritoSubCategorias(data).subscribe(
+    //   data => {
+    //     console.log(data);
+    //   }
+    // )
+     console.log("hola");
 
   }
 
