@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicio-api/login.service';
+import { PerfilService } from 'src/app/servicio-api/perfil.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +14,17 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router, private Auth : LoginService) {
+  constructor(location: Location,  private element: ElementRef,
+    private perfil: PerfilService, private router: Router, private Auth : LoginService) {
     this.location = location;
   }
 
+  nombre : string;
+  apellido : string;
+
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listarDataPerfilSidebar();
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -41,5 +47,13 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('token')
     this.router.navigate(['login'])
   }
+
+  listarDataPerfilSidebar(){
+    this.perfil.listarDataPeril().subscribe(
+      data => {
+        this.nombre = data["data"]["persona"]["per_nombres"];
+        this.apellido = data["data"]["persona"]["per_apellido"];
+       })
+    }
 
 }
