@@ -14,18 +14,13 @@ export class FavoritoService {
       // .set('Authorization',  localStorage.getItem("token"))
   }
 
-  //ip= "http://192.168.1.130:8000";
-
-  ip= "http://localhost:3000";
+  ip= "http://192.168.1.130:8000";
 
 
-
-  //listaFavorito = this.ip + "/listar-categorias";
+  listaSubcategorias = this.ip + "/listar-categorias";
   enviarFavorito = this.ip + "/seleccionar-subcategoria";
-  listaSubcategorias= this.ip + "/users";
 
-  // listarFavorito = this.ip + "/Bandeja-de-archivos";
-  listarFavorito = this.ip + "/users";
+  listarFavorito = this.ip + "/Bandeja-de-archivos";
   
 
   favoritoSubCategorias(){
