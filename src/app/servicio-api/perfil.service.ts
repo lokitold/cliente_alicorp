@@ -7,6 +7,9 @@ export class PerfilService {
 
   constructor() { }
 
+  ip= "http://192.168.1.130:8000";
+  
+  
 
 
   

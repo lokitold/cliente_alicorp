@@ -1,108 +1,106 @@
-
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
 
-        <div class="row">
-            <div class="col-lg-12">
-        <form class="navbar-search navbar-search-dark">
+      <div class="row">
+        <div class="col-lg-12">
+          <form class="navbar-search navbar-search-dark">
             <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
                 <input class="form-control" placeholder="Buscar" type="text" (focus)="focus = true"
-                (blur)="focus = false">
+                  (blur)="focus = false">
               </div>
             </div>
-            </form>
-            <br>
-          </div>
+          </form>
+          <br>
         </div>
-              <p style="color: white;">Etiquetas!</p>
-              <!-- Card stats -->
+      </div>
+      <p style="color: white;">Etiquetas!</p>
+      <!-- Card stats -->
       <br>
 
-          <div>
-          <a href="#!" class="btn btn-sm btn-primary">Caramelos</a>
-          <a href="#!" class="btn btn-sm btn-primary">Cereales</a>
-          <a href="#!" class="btn btn-sm btn-warning">Video</a>
-          <a href="#!" class="btn btn-sm btn-primary">Salsas</a>
-          <a href="#!" class="btn btn-sm btn-primary">Pre mezclas industriales </a>
-          <a href="#!" class="btn btn-sm btn-warning">Recetas</a>
-          <a href="#!" class="btn btn-sm btn-success">Excel</a>
-          <a href="#!" class="btn btn-sm btn-primary">Harinas industriales</a>
-          <a href="#!" class="btn btn-sm btn-success">Pdf</a>
-          <a href="#!" class="btn btn-sm btn-primary">Semola</a>
-        </div>
+      <div>
+        <a href="#!" class="btn btn-sm btn-primary">Caramelos</a>
+        <a href="#!" class="btn btn-sm btn-primary">Cereales</a>
+        <a href="#!" class="btn btn-sm btn-warning">Video</a>
+        <a href="#!" class="btn btn-sm btn-primary">Salsas</a>
+        <a href="#!" class="btn btn-sm btn-primary">Pre mezclas industriales </a>
+        <a href="#!" class="btn btn-sm btn-warning">Recetas</a>
+        <a href="#!" class="btn btn-sm btn-success">Excel</a>
+        <a href="#!" class="btn btn-sm btn-primary">Harinas industriales</a>
+        <a href="#!" class="btn btn-sm btn-success">Pdf</a>
+        <a href="#!" class="btn btn-sm btn-primary">Semola</a>
+      </div>
       <br>
-        <p style="color: white;">Lista de archivos!</p>
+      <p style="color: white;">Lista de archivos!</p>
     </div>
   </div>
 </div>
 
 <div class="container-fluid mt--7">
-    <div class="row" >
-      <div class="col-lg-4" *ngFor="let ar of archivos">
-        <div class="card card-stats mb-4 mb-xl-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">{{ ar.arch_nombre }}</h5>
-                <span class="h2 font-weight-bold mb-0">{{ ar.created_at}}</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                  <i class="fas fa-chart-bar"></i>
-                </div>
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let ar of archivos">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">{{ ar.arch_nombre }}</h5>
+              <span class="h2 font-weight-bold mb-0">{{ ar.created_at}}</span>
+            </div>
+            <div class="col-auto">
+              <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <i class="fas fa-chart-bar"></i>
               </div>
             </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ ar.arch_descripcion}}</span>
-            </p>
-  <br>
-            <div class="text-center col-auto">
-            <button type="button" class="btn btn-primary" >Ver archivo</button>
           </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ ar.arch_descripcion}}</span>
+          </p>
+          <br>
+          <div class="text-center col-auto">
+            <button type="button" class="btn btn-primary">Ver archivo</button>
           </div>
         </div>
       </div>
-
+      <br>
     </div>
-
-
   </div>
+</div>
+
 
 <ng-template #ModalPreferencias let-c="close" let-d="dismiss" id="ModalPreferencias">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">¡Último paso! Cuéntanos qué cosas te interesan</h4>
   </div>
 
- 
+
   <div class="modal-body px-0">
     <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
       <div class="px-2" style="overflow-y: auto; height: 100%;">
-      
+
         <div class="card-body">
 
           <div class="row icon-examples" *ngFor="let item of categorias; index as i">
-              <div *ngFor="let subcategoria of item.subcategoria" class="col-lg-4 col-md-6">
-                  <div class="btn-group btn-group-toggle btn-block">
-                      <label class="btn-icon-clipboard" id="pruebaid" ngbButtonLabel>
-                          <div>
-                        <input  (click)="addDistrict(subcategoria.id_subcategoria)" type="checkbox" ngbButton>
-                        <i class="ni ni-app" style="color:gray"></i> 
-                        <span class="text-center">{{subcategoria.sub_nombre}}</span>
-                        </div>
-                      </label>
-                    </div>
-          <br>
-          <br>
+            <div *ngFor="let subcategoria of item.subcategoria" class="col-lg-4 col-md-6">
+              <div class="btn-group btn-group-toggle btn-block">
+                <label class="btn-icon-clipboard" id="pruebaid" ngbButtonLabel>
+                  <div>
+                    <input (click)="addDistrict(subcategoria.id_subcategoria)" type="checkbox" ngbButton>
+                    <i class="ni ni-app" style="color:gray"></i>
+                    <span class="text-center">{{subcategoria.sub_nombre}}</span>
+                  </div>
+                </label>
               </div>
+              <br>
+              <br>
             </div>
-          
+          </div>
+
           <!-- {{myDist | json}} -->
-    
+
         </div>
 
 
@@ -111,8 +109,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="c('Save click')">Enviar</button>
+    <button [disabled]="buttonSendPreferencias" type="button" class="btn btn-primary"
+      (click)="sendPreferencias()">Enviar</button>
   </div>
 </ng-template>
-
-
