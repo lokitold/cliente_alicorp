@@ -12,6 +12,7 @@ import {
   chartExample2
 } from "../../variables/charts";
 import { FavoritoService } from 'src/app/servicio-api/favorito.service';
+import { PerfilService } from 'src/app/servicio-api/perfil.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,7 +44,8 @@ export class DashboardComponent implements OnInit {
   numero = 0;
 
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService,
+    private perfil: PerfilService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -51,8 +53,7 @@ export class DashboardComponent implements OnInit {
   modal : NgbModalRef;
 
   ngOnInit() {
-    this.ModalFavorito(this.ModalPreferencias);
-    this.listarSubCategorias();
+    this.listarDataPerfilSidebar();
     this.listarArchivosFavoritos()
 
     // this.registrar();
@@ -187,4 +188,19 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+
+  listarDataPerfilSidebar(){
+    this.perfil.listarDataPeril().subscribe(
+      data => {
+        if(data["data"]["usu_preferencia"] == 1){
+          return
+        }
+        else if (data["data"]["usu_preferencia"] == 0){
+          this.listarSubCategorias();
+          this.ModalFavorito(this.ModalPreferencias);
+
+        }
+      }
+    )
+  }
 }

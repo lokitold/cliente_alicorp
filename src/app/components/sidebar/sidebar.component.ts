@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PerfilService } from 'src/app/servicio-api/perfil.service';
 
 declare interface RouteInfo {
     path: string;
@@ -59,47 +60,51 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private perfil: PerfilService) { }
 
   ngOnInit() {
 
+    this.listarDataPerfilSidebar();
+   
+  }
 
-    
-        this.menuItems = ROUTESEXTERNO.filter(menuItem => menuItem);
+  listarDataPerfilSidebar(){
+    this.perfil.listarDataPeril().subscribe(
+      data => {
+
+        switch (data["data"]["id_rol"]) {
+      case 1:
+      
+        this.menuItems = ROUTESINTERNO.filter(menuItem => menuItem);
         this.router.events.subscribe((event) => {
           this.isCollapsed = true;
        });
 
+        break;
+        case 2:
 
-    // switch (key) {
-    //   case 1:
-      
-    //     this.menuItems = ROUTESINTERNO.filter(menuItem => menuItem);
-    //     this.router.events.subscribe((event) => {
-    //       this.isCollapsed = true;
-    //    });
-
-    //     break;
-    //     case 2:
-
-    //         this.menuItems = ROUTESEXTERNO.filter(menuItem => menuItem);
-    //         this.router.events.subscribe((event) => {
-    //           this.isCollapsed = true;
-    //        });
+            this.menuItems = ROUTESEXTERNO.filter(menuItem => menuItem);
+            this.router.events.subscribe((event) => {
+              this.isCollapsed = true;
+           });
         
-    //     break;
-    //     case 3:
+        break;
+        case 3:
 
-    //         this.menuItems = ROUTESMARKETING.filter(menuItem => menuItem);
-    //         this.router.events.subscribe((event) => {
-    //           this.isCollapsed = true;
-    //        });
+            this.menuItems = ROUTESMARKETING.filter(menuItem => menuItem);
+            this.router.events.subscribe((event) => {
+              this.isCollapsed = true;
+           });
         
-    //     break;
-    // }
-
-
-
-   
+        break;
+    }
+        
+        
+      }
+    )
   }
+
+
+
+
 }
