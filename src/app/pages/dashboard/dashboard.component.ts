@@ -42,6 +42,8 @@ export class DashboardComponent implements OnInit {
   numerodeprueba = 0;
   estado = false;
   numero = 0;
+  estadoPreferencia = false
+
 
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService,
@@ -165,7 +167,7 @@ export class DashboardComponent implements OnInit {
         if (data["status"] == "true") {
           this.modal.close();
           this.buttonSendPreferencias = false
-          
+          this.listarArchivosFavoritos();
         }
       }
     );
@@ -193,11 +195,13 @@ export class DashboardComponent implements OnInit {
     this.perfil.listarDataPeril().subscribe(
       data => {
         if(data["data"]["usu_preferencia"] == 1){
+          this.estadoPreferencia = true
           return
         }
         else if (data["data"]["usu_preferencia"] == 0){
           this.listarSubCategorias();
           this.ModalFavorito(this.ModalPreferencias);
+          this.estadoPreferencia = false
 
         }
       }
