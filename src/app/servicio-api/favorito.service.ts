@@ -14,23 +14,16 @@ export class FavoritoService {
       .set('Authorization',  localStorage.getItem("token"))
   }
 
-  ipp= "http://192.168.1.130:8000";
 
-  //:ip= "http://localhost:3000";
-
-
-
-  //listaFavorito = this.ip + "/listar-categorias";
-  enviarFavorito = this.ipp + "/seleccionar-subcategoria";
-  listaSubcategorias= this.ipp + "/users";
-
-  listarFavorito = this.ipp + "/Bandeja-de-archivos";
-  // listarFavorito = this.ipp + "/users";
+  ip= "http://192.168.1.130:8000";
+  listaSubcategorias = this.ip + "/listar-categorias";
+  enviarFavorito = this.ip + "/seleccionar-subcategoria";
+  listarFavorito = this.ip + "/Bandeja-de-archivos";
 
 
   favoritoSubCategorias(){
-    // return this.http.get(this.favorito+ localStorage.getItem("token"), this.header)
-    return this.http.get(this.listaSubcategorias , this.header)
+    return this.http.get(this.listaSubcategorias, this.header)
+    // return this.http.get(this.listaSubcategorias , this.header)
   }
 
   sendFavoritoSubCategorias(body : any){

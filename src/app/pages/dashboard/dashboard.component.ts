@@ -12,6 +12,7 @@ import {
   chartExample2
 } from "../../variables/charts";
 import { FavoritoService } from 'src/app/servicio-api/favorito.service';
+import { PerfilService } from 'src/app/servicio-api/perfil.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,23 +30,30 @@ export class DashboardComponent implements OnInit {
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
+  public buttonSendPreferencias: boolean = true;
+
 
   categorias: any;
   subcategorias: any;
   archivos: any;
 
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService) {
+  coco: any;
+  numerodeprueba = 0;
+  estado = false;
+  numero = 0;
+
+
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private favorito: FavoritoService,
+    private perfil: PerfilService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
-  mr: NgbModalRef;
+  modal : NgbModalRef;
 
   ngOnInit() {
-    // this.ModalFavorito(this.ModalPreferencias);
-    //  this.listarSubCategorias();
-
+    this.listarDataPerfilSidebar();
     this.listarArchivosFavoritos()
 
     // this.registrar();
@@ -77,14 +85,9 @@ export class DashboardComponent implements OnInit {
 
   }
 
-
-  // public registrar() {
-  //   this.mr = this.modalService.open(content);
-  //  }
-
   ModalFavorito(ModalPreferencias) {
     try {
-    this.modalService.open(ModalPreferencias, { size: 'lg'}); 
+      this.modal = this.modalService.open(ModalPreferencias, { size: 'lg'}); 
     } catch (error) {
       
     }
@@ -103,29 +106,24 @@ export class DashboardComponent implements OnInit {
       data => {
         var keys = Object.keys(data);
         var len = keys.length;
-        console.log(data);
-        console.log(data["0"]);
-        console.log(len);
         this.categorias = data
         for (let index = 0; index < keys.length; index++) {
-          // this.categorias = data[index]
-          console.log(data[index]["subcategoria"][""]);
-          // this.subcategorias = data[index]["subcategoria"];
           this.subcategorias = data[index]["idcategoria"];
         }
-
       }
-
     )
   }
-  coco: any;
 
-  // myDist = [];
 
-  numerodeprueba = 0;
-  estado = false;
-  numero = 0;
+
   addDistrict(item) {
+
+    if(this.myDist.length > 1){
+      this.buttonSendPreferencias = false
+    }
+    else {
+      this.buttonSendPreferencias = true
+    }
 
     if (this.myDist.length == 0) {
       // this.myDist.push(item)
@@ -159,19 +157,29 @@ export class DashboardComponent implements OnInit {
 
 
   sendPreferencias(){
+    this.buttonSendPreferencias = true
     const data = {'api_token': localStorage.getItem("token"), "subcategoria": this.myDist};
     console.log(data);
     this.favorito.sendFavoritoSubCategorias(data).subscribe(
       data => {
-        console.log(data)
+        if (data["status"] == "true") {
+          this.modal.close();
+          this.buttonSendPreferencias = false
+          
+        }
       }
     );
 
   }
 
 
+  public closeModal() {
+    this.modal.close();
+ }
+
+
+
   listarArchivosFavoritos(){
-    console.log("holaaa")
     this.favorito.listarFavoritos().subscribe(
       data => {
         console.log(data)
@@ -180,4 +188,19 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+
+  listarDataPerfilSidebar(){
+    this.perfil.listarDataPeril().subscribe(
+      data => {
+        if(data["data"]["usu_preferencia"] == 1){
+          return
+        }
+        else if (data["data"]["usu_preferencia"] == 0){
+          this.listarSubCategorias();
+          this.ModalFavorito(this.ModalPreferencias);
+
+        }
+      }
+    )
+  }
 }
