@@ -13,17 +13,17 @@ interface myData {
 })
 export class LoginService {
 
-  
+
 
   constructor(private http: HttpClient) { }
 
 
   _headers = new HttpHeaders();
-  headers = this._headers.append('Content-Type', 'application/json');
+  headers = this._headers.append('Content-Type', 'Application/json');
 
 
-  ip= "http://192.168.1.130:8000";
-  loginUrl = this.ip + "/login?usuario=";
+  ip = "http://192.168.1.130:8000/login";
+   loginUrl = this.ip + "/login?usuario=";
 
 
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn')  || 'false');
@@ -38,7 +38,7 @@ export class LoginService {
   }
 
   getUserDetails(usuario, password) {
-  return this.http.post<myData>(this.loginUrl + '?usuario=' + usuario + '&password=' + password , {usuario, password}, {headers : this.headers});
+  return this.http.post<myData>(this.ip + '?usuario=' + usuario + '&password=' + password , {usuario, password}, {headers : this.headers});
   }
 
 
