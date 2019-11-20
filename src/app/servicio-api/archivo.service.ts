@@ -5,7 +5,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ArchivoService {
-  SERVER_URL= " https://192.168.1.130:8000/adjuntar-archivos";
+
+  SERVER_URL= "http://192.168.1.130:8000/adjuntar-archivos";
   constructor(private httpClient: HttpClient) { }
   public upload(formData) {
     return this.httpClient.post<any>(this.SERVER_URL, formData, {
