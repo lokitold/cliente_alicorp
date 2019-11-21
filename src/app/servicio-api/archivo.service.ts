@@ -6,9 +6,8 @@ import { map } from 'rxjs/operators';
 })
 export class ArchivoService {
 
-  SERVER_URL= "http://192.168.1.130:8000/adjuntar-archivos";
 
-  ip = "http://192.168.1.130:8000"
+  ip = "http://34.213.90.54"
   enviarArchivo = this.ip + "/adjuntar-archivos"
 
   constructor(private httpClient: HttpClient) { }

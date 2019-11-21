@@ -15,7 +15,7 @@ export class PerfilService {
   }
 
 
-  ip= "http://192.168.1.130:8000";
+  ip= "http://34.213.90.54";
   
   perfil = this.ip +"/perfil";
 

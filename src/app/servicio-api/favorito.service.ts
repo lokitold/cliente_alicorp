@@ -15,20 +15,20 @@ export class FavoritoService {
   }
 
 
-  ip= "http://192.168.1.130:8000";
+  ip= "http://34.213.90.54";
 
 
-  //listaSubcategorias = this.ip + "/listar-categorias";
-  listaSubcategorias = "http://localhost:3000/users";
+  listaSubcategorias = this.ip + "/listar-categorias";
 
   
   enviarFavorito = this.ip + "/seleccionar-subcategoria";
   listarFavorito = this.ip + "/Bandeja-de-archivos";
 
+  verarchivoatri = this.ip + "/ver-archivo";
+
 
   favoritoSubCategorias(){
     return this.http.get(this.listaSubcategorias, this.header)
-    // return this.http.get(this.listaSubcategorias , this.header)
   }
 
   sendFavoritoSubCategorias(body : any){
@@ -37,6 +37,11 @@ export class FavoritoService {
 
   listarFavoritos(){
     return this.http.get(this.listarFavorito , this.header)
+  }
+
+  verArchivoFunc(id){
+    return this.http.post(this.verarchivoatri + "?id_archivo="+ id, {id}, this.header)
+
   }
 
 

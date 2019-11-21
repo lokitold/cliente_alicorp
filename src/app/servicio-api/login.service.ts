@@ -22,8 +22,14 @@ export class LoginService {
   headers = this._headers.append('Content-Type', 'Application/json');
 
 
-  ip = "http://192.168.1.130:8000/login";
-   loginUrl = this.ip + "/login?usuario=";
+  ip = "http://34.213.90.54";
+  // ip = "";
+
+
+  loginUrl = this.ip + "/login";
+
+  // http://34.213.90.54/login?usuario=jeiner&password=toor
+
 
 
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn')  || 'false');
@@ -38,7 +44,7 @@ export class LoginService {
   }
 
   getUserDetails(usuario, password) {
-  return this.http.post<myData>(this.ip + '?usuario=' + usuario + '&password=' + password , {usuario, password}, {headers : this.headers});
+  return this.http.post<myData>(this.loginUrl + '?usuario=' + usuario + '&password=' + password , {usuario, password}, {headers : this.headers});
   }
 
 

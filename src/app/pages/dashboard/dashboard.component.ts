@@ -24,6 +24,7 @@ import { PerfilService } from 'src/app/servicio-api/perfil.service';
 
 export class DashboardComponent implements OnInit {
   @ViewChild ('ModalPreferencias') public ModalPreferencias: ElementRef;
+  @ViewChild ('ModalViewFile') public ModalViewFile: ElementRef;
 
   public datasets: any;
   public data: any;
@@ -94,6 +95,17 @@ export class DashboardComponent implements OnInit {
       
     }
   }
+
+
+  ModalFileView(ModalViewFile) {
+    try {
+      this.modal = this.modalService.open(ModalViewFile, { size: 'lg'}); 
+    } catch (error) {
+      
+    }
+  }
+
+
 
   public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
@@ -189,6 +201,21 @@ export class DashboardComponent implements OnInit {
         this.archivos = data;
       }
     );
+  }
+
+  visualizarArchivo(){
+    
+    // const formData = new FormData();
+    // formData.append("id_archivo", "18");
+    
+    this.favorito.verArchivoFunc("16").subscribe(
+      data => {
+        console.log(data)
+      }
+    )
+
+    this.ModalFavorito(this.ModalViewFile)
+
   }
 
 

@@ -28,9 +28,18 @@ export class SubirarchivoComponent implements OnInit {
   files  = [];
   
   foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+    {value: 'steak-0', viewValue: 'Chocolate'},
+    {value: 'pizza-1', viewValue: 'Galletas'},
+    {value: 'tacos-2', viewValue: 'Barras'},
+    {value: 'pizza-1', viewValue: 'Caramelos'},
+    {value: 'tacos-2', viewValue: 'Cereales'},
+    {value: 'tacos-2', viewValue: 'Aceites Domesticos'},
+    {value: 'pizza-1', viewValue: 'Harinas Domesticas'},
+    {value: 'tacos-2', viewValue: 'Margarina Domesticos'},
+    {value: 'pizza-1', viewValue: 'Pastas'},
+    {value: 'pizza-1', viewValue: 'Salsas'},
+    {value: 'tacos-2', viewValue: 'Cemola'},
+    {value: 'pizza-1', viewValue: 'Ayudas Culinarias'},
   ];
 
   categorias: any;
@@ -49,24 +58,6 @@ export class SubirarchivoComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file.data);
     file.inProgress = true;
-    // this.uploadService.upload(formData).pipe(
-    //   map(event => {
-    //     switch (event.type) {
-    //       case HttpEventType.UploadProgress:
-    //         file.progress = Math.round(event.loaded * 100 / event.total);
-    //         break;
-    //       case HttpEventType.Response:
-    //         return event;
-    //     }
-    //   }),
-    //   catchError((error: HttpErrorResponse) => {
-    //     file.inProgress = false;
-    //     return of(`${file.data.name} upload failed.`);
-    //   })).subscribe((event: any) => {
-    //     if (typeof (event) === 'object') {
-    //       console.log(event.body);
-    //     }
-    //   });
   }
 
 
@@ -111,8 +102,12 @@ listarSubCategorias() {
   )
 }
 
-functionCall(event){
-  console.log(event)
+subcategoriasSelect: any
+
+public onChange(event): void {
+  console.log(this.categorias[event.target.value])
+  console.log(this.categorias[event.target.value])
+ this.subcategoriasSelect = this.categorias[event.target.value]
 }
 
 
@@ -156,9 +151,14 @@ sendFiles(){
         console.log(data);
       }
     )
-
+      if(index == this.files.length){
+        this.files = [];
+      }
 
   }
+
+  
+
 }
 
 }

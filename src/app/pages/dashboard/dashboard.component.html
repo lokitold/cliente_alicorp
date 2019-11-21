@@ -61,7 +61,7 @@
           </p>
           <br>
           <div class="text-center col-auto">
-            <button type="button" class="btn btn-primary">Ver archivo</button>
+            <button type="button" class="btn btn-primary" (click)="visualizarArchivo()">Ver archivo</button>
           </div>
         </div>
       </div>
@@ -112,4 +112,22 @@
     <button [disabled]="buttonSendPreferencias" type="button" class="btn btn-primary"
       (click)="sendPreferencias()">Enviar</button>
   </div>
+</ng-template>
+
+
+<ng-template #ModalViewFile let-c="close" let-d="dismiss" id="ModalViewFile">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Visualizar Archivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  <div class="modal-body">
+    <div class="card-body">
+        <div class="text-center">
+      <iframe width="700" height="700" src="https://alicorp.s3.us-east-2.amazonaws.com/archivo/LX5XB9efVkzYFKD7qOpDeaCyIT3aRMI7UACGoJzx.pdf" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+    </div>
+  </div>
+
 </ng-template>
