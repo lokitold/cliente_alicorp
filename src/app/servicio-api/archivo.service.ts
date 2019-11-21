@@ -7,9 +7,14 @@ import { map } from 'rxjs/operators';
 export class ArchivoService {
 
   SERVER_URL= "http://192.168.1.130:8000/adjuntar-archivos";
+
+  ip = "http://192.168.1.130:8000"
+  enviarArchivo = this.ip + "/adjuntar-archivos"
+
   constructor(private httpClient: HttpClient) { }
-  public upload(formData) {
-    return this.httpClient.post<any>(this.SERVER_URL, formData, {
+  
+  enviarArchivoFunc(body) {
+    return this.httpClient.post<any>(this.enviarArchivo, body, {
       reportProgress: true,
       observe: 'events'
     });

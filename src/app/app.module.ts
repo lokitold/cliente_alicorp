@@ -12,6 +12,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
+
+
+import { MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatButtonModule,
+  MatProgressBarModule,
+  MatSelectModule } from '@angular/material';
+
+  // import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 
 @NgModule({
@@ -22,14 +34,28 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxDropzoneModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatSelectModule
   ],
+  exports: [MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
   ],
   providers: [],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

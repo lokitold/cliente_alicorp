@@ -18,7 +18,10 @@ export class FavoritoService {
   ip= "http://192.168.1.130:8000";
 
 
-  listaSubcategorias = this.ip + "/listar-categorias";
+  //listaSubcategorias = this.ip + "/listar-categorias";
+  listaSubcategorias = "http://localhost:3000/users";
+
+  
   enviarFavorito = this.ip + "/seleccionar-subcategoria";
   listarFavorito = this.ip + "/Bandeja-de-archivos";
 

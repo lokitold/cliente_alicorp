@@ -106,6 +106,7 @@ export class DashboardComponent implements OnInit {
   listarSubCategorias() {
     this.favorito.favoritoSubCategorias().subscribe(
       data => {
+        console.log(data)
         var keys = Object.keys(data);
         var len = keys.length;
         this.categorias = data

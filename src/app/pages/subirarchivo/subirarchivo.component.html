@@ -75,41 +75,88 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="table table-striped" class="files" id="previews">
+         
+          <div style="text-align:left;">
+            <mat-card >
+                    <mat-card-content>
+                        <ul>
+                            <li *ngFor="let file of files;let index = index">
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                                    </div>
+                              </div>
 
-            <div id="template" class="file-row">
-              <!-- This is used as the file preview template -->
-              <div>
-                  <span class="preview"><img data-dz-thumbnail /></span>
-              </div>
-              <div>
-                  <p class="name" data-dz-name></p>
-                  <strong class="error text-danger" data-dz-errormessage></strong>
-              </div>
-              <div>
-                  <p class="size" data-dz-size></p>
-                  <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                    <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                      <h4>Nombre</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4>Categoria</h4>
+                                      </div>
+                                      <div class="col-md-3">
+                                          <h4>Sub Categoria</h4>
+                                      </div>
+                                      <div class="col-md-2">
+                                          <h4>Acción</h4>
+                                      </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-4">
+                                  <span id="file-label">
+                                    {{file.data.name}}
+                                </span>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-select >
+                                    <mat-option (change)="functionCall($event)" *ngFor="let item of categorias; index as i" [value]="item.idcategoria">
+                                      {{item.cat_nombre}}
+                                    </mat-option>
+                                  </mat-select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <mat-select >
+                                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                                        {{food.viewValue}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </div>
+                                  
+                                  <div class="col-md-2">
+                                      <a href="javascript:void(0)" (click)="removeSelectedFile(index)"  class="btn btn-sm btn-danger mr-4"><mat-icon>delete</mat-icon></a>
+                                  </div>
+                              </div>
+                            </li>
+                        </ul>
+                    </mat-card-content>
+                   
+                </mat-card>
+            </div>
+            <br>
+            
+            <mat-card-actions>
+              <div class="row">
+                  <div class="col-md-6 text-left">
+                      <button mat-button color="warn" (click)="onClick()">
+                          <mat-icon>file_upload</mat-icon>
+                          Cargar Archivo
+                      </button>
+                      <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" style="display:none;" />
+                  </div>
+
+                  <div class="col-md-6 text-right">
+                      <button mat-button color="warn"(click)="sendFiles()">
+                          <mat-icon>file_upload</mat-icon>
+                          Enviar Archivos
+                      </button>
                   </div>
               </div>
-              <div>
-                <button class="btn btn-primary start">
-                    <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
-                </button>
-                <button data-dz-remove class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-                <button data-dz-remove class="btn btn-danger delete">
-                  <i class="glyphicon glyphicon-trash"></i>
-                  <span>Delete</span>
-                </button>
-              </div>
-            </div>
-          
-          </div>
+            </mat-card-actions>
+
+
         </div>
+       
       </div>
 
     </div>

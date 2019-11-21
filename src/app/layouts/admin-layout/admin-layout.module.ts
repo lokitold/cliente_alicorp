@@ -15,6 +15,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { ToastrModule } from 'ngx-toastr';
 import {SubirarchivoComponent}  from '../../pages/subirarchivo/subirarchivo.component';
 
+
+import { MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatButtonModule,
+  MatProgressBarModule,
+  MatSelectModule } from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +30,13 @@ import {SubirarchivoComponent}  from '../../pages/subirarchivo/subirarchivo.comp
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatSelectModule
   ],
   declarations: [
     DashboardComponent,
