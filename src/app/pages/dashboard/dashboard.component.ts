@@ -227,9 +227,9 @@ export class DashboardComponent implements OnInit {
           return
         }
         else if (data["data"]["usu_preferencia"] == 0){
-          this.listarSubCategorias();
-          this.ModalFavorito(this.ModalPreferencias);
           this.estadoPreferencia = false
+          this.ModalFavorito(this.ModalPreferencias);
+          this.listarSubCategorias();
 
         }
       }
