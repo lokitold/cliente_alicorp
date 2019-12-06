@@ -5,13 +5,12 @@
       <div class="row">
         <div class="col-lg-12">
           <form class="navbar-search navbar-search-dark">
-            <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+            <div class="form-group mb-0" >
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
-                <input class="form-control" placeholder="Buscar" type="text" (focus)="focus = true"
-                  (blur)="focus = false">
+                <input class="form-control" placeholder="Buscar" type="text"
               </div>
             </div>
           </form>
